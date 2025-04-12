@@ -1,7 +1,7 @@
 name: flutter_broadcasts_plus
 description: change flutter_broadcasts  add android namespace
 version: 0.0.1
-repository:
+homepage: https://github.com/chengmengyi/flutter_broadcasts_plus
 
 environment:
   sdk: ">=2.12.0 <4.0.0"
