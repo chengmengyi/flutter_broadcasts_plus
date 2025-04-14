@@ -23,6 +23,10 @@ class CustomBroadcastReceiver(
         const val TAG: String = "CustomBroadcastReceiver"
     }
 
+    public CustomBroadcastReceiver(){
+        super();
+    }
+
     private val intentFilter: IntentFilter by lazy {
         val intentFilter = IntentFilter()
         names.forEach { intentFilter.addAction(it) }
