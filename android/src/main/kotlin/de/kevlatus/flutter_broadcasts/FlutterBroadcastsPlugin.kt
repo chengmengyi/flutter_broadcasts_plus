@@ -14,16 +14,14 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import java.io.Serializable
 
-class CustomBroadcastReceiver(
-        val id: Int,
-        private val names: List<String>,
-        private val listener: (Any) -> Unit
-) : BroadcastReceiver() {
+class CustomBroadcastReceiver() : BroadcastReceiver() {
     companion object {
         const val TAG: String = "CustomBroadcastReceiver"
     }
 
-    constructor():super()
+    var id:Int=1
+    var names=listOf("")
+    var listener:(Any)->Unit={}
 
     private val intentFilter: IntentFilter by lazy {
         val intentFilter = IntentFilter()
@@ -121,9 +119,17 @@ class MethodCallHandlerImpl(
 
     private fun onStartReceiver(call: MethodCall, result: Result) {
         withReceiverArgs(call, result) { id, names ->
-            broadcastManager.startReceiver(CustomBroadcastReceiver(id, names) { broadcast ->
+//            broadcastManager.startReceiver(CustomBroadcastReceiver(id, names) { broadcast ->
+//                channel?.invokeMethod("receiveBroadcast", broadcast)
+//            })
+
+            var c=CustomBroadcastReceiver()
+            c.id=id
+            c.names=names
+            c.listener={ broadcast ->
                 channel?.invokeMethod("receiveBroadcast", broadcast)
-            })
+            }
+            broadcastManager.startReceiver(c)
             result.success(null)
         }
     }
