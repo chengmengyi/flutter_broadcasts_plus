@@ -23,9 +23,7 @@ class CustomBroadcastReceiver(
         const val TAG: String = "CustomBroadcastReceiver"
     }
 
-    public CustomBroadcastReceiver(){
-        super();
-    }
+    constructor():super()
 
     private val intentFilter: IntentFilter by lazy {
         val intentFilter = IntentFilter()
